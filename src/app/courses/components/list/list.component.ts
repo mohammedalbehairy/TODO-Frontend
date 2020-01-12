@@ -22,7 +22,6 @@ export class ListComponent implements OnInit {
   delete(id: string) {
     this.coursesService.delete(id).subscribe(
       () => {
-        console.log('done');
         this.loadCourses();
         this.toastrService.success('Deleted successfully','success');
       },
