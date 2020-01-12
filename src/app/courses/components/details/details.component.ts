@@ -1,7 +1,8 @@
 import { ICourse } from './../../interfaces/ICourse';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../../services/courses.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-details',
@@ -13,7 +14,9 @@ export class DetailsComponent implements OnInit {
   public course: ICourse;
   constructor(
     private route: ActivatedRoute,
-    private coursesService: CoursesService
+    private router: Router,
+    private coursesService: CoursesService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -21,11 +24,13 @@ export class DetailsComponent implements OnInit {
     this.coursesService.getById(this.id).subscribe(
       (data: ICourse) => {
         this.course = data;
-        console.log(data);
-
       },
       err => {
         console.log(err);
+        if (err.status === 400){
+          this.toastrService.error(err.error.message, 'error');
+          this.router.navigate(['/courses']);
+        }
       }
     )
   }

@@ -33,11 +33,14 @@ export class EditComponent implements OnInit {
     this.coursesService.getById(this.id).subscribe(
       (data: any) => {
         this.course = data;
-        console.log(data);
         this.loadValuesInForm();
       },
       err => {
         console.log(err);
+        if (err.status === 400){
+          this.toastrService.error(err.error.message, 'error');
+          this.router.navigate(['/courses']);
+        }
       }
     )
   }
