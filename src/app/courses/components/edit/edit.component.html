@@ -1,0 +1,31 @@
+<a [routerLink]="['/courses']" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Back To List</a>
+<br>
+<form [formGroup]="createForm" (submit)="onSubmit()">
+  <div class="form-group">
+    <label>name</label>
+    <input type="text" class="form-control" placeholder="Name" formControlName="name">
+  </div>
+
+  <div class="row" *ngIf="name.touched && name.invalid">
+    <span class="alert alert-danger" *ngIf="name.errors.required">
+      <small class="text-danger">
+        Sorry,Name is required
+      </small>
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label>Details</label>
+    <textarea class="form-control" rows="3" formControlName="details"></textarea>
+  </div>
+
+  <div class="row" *ngIf="details.touched && details.invalid">
+    <span class="alert alert-danger" *ngIf="details.errors.required">
+      <small class="text-danger">
+        Sorry,Details is required
+      </small>
+    </span>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
