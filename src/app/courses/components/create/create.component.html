@@ -19,7 +19,7 @@
     <textarea class="form-control" rows="3" formControlName="details"></textarea>
   </div>
 
-  <div class="row" *ngIf="details.touched && details.invalid">
+  <div class="row" *ngIf="(details.touched||submitted) && details.invalid">
     <span class="alert alert-danger" *ngIf="details.errors.required">
       <small class="text-danger">
         Sorry,Details is required

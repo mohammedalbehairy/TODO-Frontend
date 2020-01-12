@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
+  submitted = false;
   returnTo = '';
 
   constructor(
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.submitted = true;
     if (this.loginForm.invalid) return;
     this.authService.login(this.loginForm.value).subscribe((res: IResUserLogin) => {
 
